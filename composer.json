@@ -1,0 +1,26 @@
+{
+    "name": "pkj/pkj-any-parent-type",
+    "version": "0.0.1",
+    "description": "This plugin lets you select what parent pages you allow to set for custom post types. By default only the same type is allowed.",
+    "keywords": [
+        "grid",
+        "source",
+        "wordpress",
+        "plugin"
+    ],
+    "homepage": "https://github.com/peec/pkj-any-parent-type",
+    "license": "GPLv2 or later",
+    "authors": [
+        {
+            "name": "Petter Kjelkenes",
+            "email": "post@pkj.no",
+            "homepage": "http://pkj.no",
+            "role": "Developer"
+        }
+    ],
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=5.3.2",
+        "composer/installers": ">= 1.0"
+    }
+}
