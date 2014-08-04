@@ -66,12 +66,14 @@ class Pkj_AnyParentType_Rewrite {
             $flush = true;
 
             // For performance, do we need to flush ?
+            /*
             if ($this->rewriteRulesOldPostObject) {
-                // Check if parent id changed.
-                if ($post->post_parent == $this->rewriteRulesOldPostObject->post_parent) {
+                // Check if parent id or name changed.
+                if ($post->post_name || 
+                    $post->post_parent == $this->rewriteRulesOldPostObject->post_parent) {
                     $flush = false;
                 }
-            }
+            } breaks WPML*/
             if ($flush) {
                 $rule = $this->rewrite_rules_get_rule($post);
                 add_rewrite_rule($rule['from'], $rule['to'], 'top'); // RULES MUST BE ON TOP...
@@ -96,8 +98,11 @@ class Pkj_AnyParentType_Rewrite {
 
         $postTypeSchema = Pkj_AnyParentType_Global::instance()->get_post_type_schema();
 
+        
+        
         foreach($postTypeSchema as $postType => $info) {
-            $q = new WP_Query("nopaging=true&post_type=$postType");
+            // suppress_filters for wpml
+            $q = new WP_Query("suppress_filters=1&nopaging=true&post_type=$postType");
             while ( $q->have_posts() ) {
                 $q->the_post();
                 //var_dump($post);
@@ -118,6 +123,18 @@ class Pkj_AnyParentType_Rewrite {
             $url_endpoint = get_permalink($post->post_parent);
             $url_endpoint = parse_url( $url_endpoint );
             $slug = substr($url_endpoint['path'], 1); // remove initial slash.
+        }
+
+        // WPML compability, remove such as "fr" "nb" from the "from part".
+        if (defined('ICL_LANGUAGE_CODE')) {
+            global $sitepress;
+            $dl = $sitepress->get_default_language();
+            $codelen = strlen(ICL_LANGUAGE_CODE);
+
+            if ($dl != ICL_LANGUAGE_CODE && 
+                substr($slug, 0, $codelen+1) == ICL_LANGUAGE_CODE.'/') {
+                $slug = substr($slug, 3);
+            }
         }
         return array(
             'from' => $slug.$post->post_name.'$',
