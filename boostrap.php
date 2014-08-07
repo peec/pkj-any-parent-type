@@ -4,7 +4,7 @@ Plugin Name: PKJ Any Parent Type
 Text Domain: pkj-any-parent-type
 Plugin URI: https://github.com/peec/pkj-any-parent-type
 Description: This plugin lets you select what parent pages you allow to set for custom post types. By default only the same type is allowed.
-Version: 0.0.2
+Version: 0.0.3
 Author: Petter Kjelkenes
 Author URI: http://pkj.no
 License: GPLv2 or later
