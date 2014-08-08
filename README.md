@@ -2,7 +2,7 @@
 
 This plugin lets you select what parent pages you allow to set for custom post types. By default only the same type is allowed.
 
-![Alt text](/assets/screenshot-1.png?raw=true "")
+![Alt text](/screenshot-1.png?raw=true "")
 
 
 The PKJ Any Parent Type plugin lets you customize what parent post types that are allowed for each custom post type.
